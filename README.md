@@ -1,69 +1,67 @@
 # 📦 Simple Warehouse System (S-Data Project)
 
-![Status](https://img.shields.io/badge/Status-Beginner%20Friendly-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Academic%20Project-green?style=for-the-badge)
 ![Team](https://img.shields.io/badge/Team-5%20Members-blue?style=for-the-badge)
 
-> **"Aplikasi Gudang Sederhana"**
-> Simulasi cara kerja gudang menggunakan 5 Struktur Data dasar.
+> **"Simulasi Logistik Gudang Sederhana"**
+> Penerapan 5 Struktur Data Fundamental untuk manajemen gudang yang efisien.
 
 ## 📖 Tentang Project Ini
-Ini adalah tugas kelompok kami untuk membuat simulasi gudang. Kami mencoba menerapkan 5 metode penyimpanan data yang berbeda untuk 5 fungsi yang berbeda di dalam gudang. Tujuannya agar kami paham kapan harus pakai Array, Stack, Queue, dll.
+Project ini adalah simulasi sistem manajemen gudang untuk memenuhi tugas Struktur Data. Kami membagi alur kerja gudang menjadi 5 modul terpisah, di mana setiap modul menggunakan struktur data yang paling sesuai dengan karakteristik masalahnya (Array, Linked List, Stack, Queue, dan Tree).
 
 ---
 
 ## 🏗️ Pembagian Tugas & Logika (Modules)
 
-Berikut adalah bagaimana kami membagi peran struktur data dalam gudang ini:
+Berikut adalah penjelasan teknis bagaimana setiap struktur data bekerja dalam ekosistem gudang kami:
 
-### 1. 🗄️ Daftar Stok Barang (Inventory)
+### 1. 🗄️ Manajemen Rak Gudang (Storage)
 * **Penanggung Jawab:** Banu
 * **Menggunakan:** **Array**
-* **Penjelasan:** * Ini adalah **Daftar Utama** barang yang ada di gudang.
-    * Kita pakai Array karena jumlah rak di gudang sudah pasti (misal: Rak 1 sampai Rak 100).
-    * Jadi kalau mau cek isi Rak nomor 10, kita bisa langsung akses datanya dengan mudah.
+* **Fungsi:** Menyimpan data fisik barang di rak.
+* **Alasan:** Jumlah rak gudang bersifat tetap (misal: 100 slot). Menggunakan Array memungkinkan akses langsung (*Direct Access*) ke nomor rak tertentu tanpa perlu mencari satu per satu.
 
-### 2. 📝 Riwayat Barang Masuk (Restock History)
+### 2. 📝 Log Riwayat Restock (History)
 * **Penanggung Jawab:** Bintang
 * **Menggunakan:** **Linked List**
-* **Penjelasan:** * Setiap kali ada supplier mengirim barang baru ke gudang, datanya dicatat di sini.
-    * Kita pakai Linked List karena kita tidak tahu berapa banyak barang yang akan masuk hari ini.
-    * Datanya saling bersambung seperti rantai. Data baru tinggal disambung di bagian belakang.
+* **Fungsi:** Mencatat riwayat setiap barang yang masuk dari supplier.
+* **Alasan:** Data riwayat bersifat dinamis (tidak terbatas). Linked List memungkinkan penambahan catatan baru (`insert tail`) secara terus-menerus tanpa membebani memori di awal seperti Array.
 
-### 3. 📦 Tumpukan Packing (Ready to Ship)
-* **Penanggung Jawab:** Michdan
-* **Menggunakan:** **Stack (Tumpukan)**
-* **Penjelasan:** * Ini adalah area tempat barang yang sudah siap dikirim ditumpuk.
-    * Prinsipnya **LIFO (Last In, First Out)**.
-    * Bayangkan tumpukan kardus: Kardus yang **terakhir ditaruh** di posisi paling atas, adalah yang **pertama kali diambil** oleh kurir pengiriman.
-
-### 4. 🛒 Antrian Pesanan Pembeli (Orders)
+### 3. 🛒 Antrian Pesanan (Order Processing)
 * **Penanggung Jawab:** Raja
 * **Menggunakan:** **Queue (Antrian)**
-* **Penjelasan:** * Daftar pesanan dari customer yang harus segera diproses.
-    * Prinsipnya **FIFO (First In, First Out)**.
-    * Pesanan yang **masuk duluan**, harus dilayani dan **dikerjakan duluan**. Adil kan?
+* **Fungsi:** Menampung daftar pesanan pelanggan yang masuk.
+* **Alasan:** Menggunakan prinsip **FIFO (First In, First Out)** untuk keadilan. Pesanan yang masuk pertama kali ke sistem akan diproses dan disiapkan lebih dulu.
 
-### 5. 🔍 Pencarian ID Barang (Search)
+### 4. 🚚 Loading Barang ke Truk (Shipping)
+* **Penanggung Jawab:** Michdan
+* **Menggunakan:** **Stack (Tumpukan)**
+* **Fungsi:** Simulasi menumpuk barang ke troli/palet sebelum dimasukkan ke dalam truk.
+* **Alasan:** Menggunakan prinsip **LIFO (Last In, First Out)** untuk mengatur posisi muatan.
+    * Barang pesanan pertama ditumpuk paling bawah di troli, agar saat dibongkar masuk ke truk, ia berada di posisi **paling dekat pintu**.
+    * Ini memastikan barang yang pertama dipesan tetap bisa diturunkan pertama kali di tujuan.
+
+### 5. 🔍 Katalog & Pencarian (Indexing)
 * **Penanggung Jawab:** Albani
 * **Menggunakan:** **Tree (Pohon Data)**
-* **Penjelasan:** * Fitur untuk mencari apakah sebuah barang ada di gudang atau tidak berdasarkan ID Barang.
-    * Dengan metode Tree, kita bisa mencari barang lebih cepat dengan memilah ID (kiri lebih kecil, kanan lebih besar), jadi tidak perlu mengecek rak satu per satu dari awal.
+* **Fungsi:** Peta indeks untuk mencari lokasi barang berdasarkan ID.
+* **Alasan:** Pencarian menggunakan struktur Tree jauh lebih cepat dibanding mencari linear. Tree membantu admin menemukan di rak nomor berapa sebuah barang disimpan hanya dengan input ID Barang.
 
 ---
 
-## 👥 Anggota Kelompok
+## 👥 Tim Pengembang
 
-| Nama | Bagian |
-| :--- | :--- |
-| **Banu** | `Array` (List Rak Gudang) |
-| **Bintang** | `Linked List` (Catatan Barang Masuk) |
-| **Michdan** | `Stack` (Tumpukan Packing) |
-| **Raja** | `Queue` (Antrian Pesanan) |
-| **Albani** | `Tree` (Pencarian Barang) |
+| Nama | Role / Struktur Data | Fokus Pengerjaan |
+| :--- | :--- | :--- |
+| **Banu** | `Array` | Fisik Rak Gudang |
+| **Bintang** | `Linked List` | Pencatatan Log Masuk |
+| **Raja** | `Queue` | Administrasi Pesanan |
+| **Michdan** | `Stack` | Logika Muat Barang (Loading) |
+| **Albani** | `Tree` | Mesin Pencari Lokasi |
 
 ---
 
 ## 💻 Cara Menjalankan
-1. Clone repo ini.
-2. Jalankan file `main.py` (atau `main.cpp`).
-3. Ikuti menu yang muncul di layar untuk simulasi gudang.
+1. Clone repository ini.
+2. Buka terminal dan jalankan file `main.py` (atau `main.cpp`).
+3. Ikuti instruksi menu di layar untuk melakukan simulasi (Tambah Barang, Pesan Barang, Kirim Barang, Cari Barang).

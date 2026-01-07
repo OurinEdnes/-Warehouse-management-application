@@ -1,85 +1,69 @@
-# 📦 Warehouse Management System (WMS) Structure
+# 📦 Simple Warehouse System (S-Data Project)
 
-![Project Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge&logo=git)
-![Language](https://img.shields.io/badge/Language-Python%20%7C%20C%2B%2B-blue?style=for-the-badge&logo=python)
-![Course](https://img.shields.io/badge/Course-Data%20Structure%20%26%20Algorithm-orange?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Beginner%20Friendly-green?style=for-the-badge)
+![Team](https://img.shields.io/badge/Team-5%20Members-blue?style=for-the-badge)
 
-> **"Efficiency is the soul of a Warehouse."**
-> A comprehensive simulation of warehouse logistics implemented using 5 fundamental Data Structures.
+> **"Aplikasi Gudang Sederhana"**
+> Simulasi cara kerja gudang menggunakan 5 Struktur Data dasar.
 
-## 📖 Table of Contents
-* [About the Project](#-about-the-project)
-* [System Architecture](#-system-architecture-modules)
-* [Technical Implementation](#-technical-implementation)
-* [Team Contributors](#-team-contributors)
-* [Installation & Usage](#-installation--usage)
+## 📖 Tentang Project Ini
+Ini adalah tugas kelompok kami untuk membuat simulasi gudang. Kami mencoba menerapkan 5 metode penyimpanan data yang berbeda untuk 5 fungsi yang berbeda di dalam gudang. Tujuannya agar kami paham kapan harus pakai Array, Stack, Queue, dll.
 
 ---
 
-## 🧐 About The Project
+## 🏗️ Pembagian Tugas & Logika (Modules)
 
-**Warehouse Management System (WMS)** ini adalah proyek tugas akhir untuk mata kuliah Struktur Data. Aplikasi ini dirancang untuk mensimulasikan ekosistem gudang modern, di mana pengelolaan barang, pencatatan transaksi, dan pemrosesan pesanan terjadi secara real-time.
+Berikut adalah bagaimana kami membagi peran struktur data dalam gudang ini:
 
-Tantangan utama dalam proyek ini adalah **mengintegrasikan 5 struktur data berbeda** (Array, Linked List, Stack, Queue, dan Tree) agar dapat bekerja secara harmonis untuk menyelesaikan masalah logistik yang spesifik. Kami membuktikan bahwa pemilihan struktur data yang tepat dapat meningkatkan efisiensi operasional secara signifikan.
+### 1. 🗄️ Daftar Stok Barang (Inventory)
+* **Penanggung Jawab:** Banu
+* **Menggunakan:** **Array**
+* **Penjelasan:** * Ini adalah **Daftar Utama** barang yang ada di gudang.
+    * Kita pakai Array karena jumlah rak di gudang sudah pasti (misal: Rak 1 sampai Rak 100).
+    * Jadi kalau mau cek isi Rak nomor 10, kita bisa langsung akses datanya dengan mudah.
 
----
+### 2. 📝 Riwayat Barang Masuk (Restock History)
+* **Penanggung Jawab:** Bintang
+* **Menggunakan:** **Linked List**
+* **Penjelasan:** * Setiap kali ada supplier mengirim barang baru ke gudang, datanya dicatat di sini.
+    * Kita pakai Linked List karena kita tidak tahu berapa banyak barang yang akan masuk hari ini.
+    * Datanya saling bersambung seperti rantai. Data baru tinggal disambung di bagian belakang.
 
-## 🏗️ System Architecture (Modules)
+### 3. 📦 Tumpukan Packing (Ready to Ship)
+* **Penanggung Jawab:** Michdan
+* **Menggunakan:** **Stack (Tumpukan)**
+* **Penjelasan:** * Ini adalah area tempat barang yang sudah siap dikirim ditumpuk.
+    * Prinsipnya **LIFO (Last In, First Out)**.
+    * Bayangkan tumpukan kardus: Kardus yang **terakhir ditaruh** di posisi paling atas, adalah yang **pertama kali diambil** oleh kurir pengiriman.
 
-Aplikasi ini dibagi menjadi 5 modul utama berdasarkan fungsionalitas dan struktur data yang digunakan:
+### 4. 🛒 Antrian Pesanan Pembeli (Orders)
+* **Penanggung Jawab:** Raja
+* **Menggunakan:** **Queue (Antrian)**
+* **Penjelasan:** * Daftar pesanan dari customer yang harus segera diproses.
+    * Prinsipnya **FIFO (First In, First Out)**.
+    * Pesanan yang **masuk duluan**, harus dilayani dan **dikerjakan duluan**. Adil kan?
 
-### 1. 🗄️ Inventory Storage (The Rack)
-* **Responsible:** Banu
-* **Data Structure:** **Array**
-* **Logic:**
-    * Digunakan untuk merepresentasikan fisik rak gudang.
-    * Setiap indeks array mewakili nomor slot rak yang unik.
-    * **Keunggulan:** Akses data (pengambilan/penyimpanan) memiliki kompleksitas waktu **$O(1)$** (Constant Time) karena lokasi slot sudah terindeks secara pasti.
-
-### 2. 📜 Transaction History (The Logger)
-* **Responsible:** Bintang
-* **Data Structure:** **Linked List**
-* **Logic:**
-    * Mencatat setiap aktivitas (Barang Masuk/Keluar) sebagai sebuah *node*.
-    * Node baru akan selalu ditambahkan di akhir rantai (Tail).
-    * **Keunggulan:** **Dynamic Size**. Tidak seperti Array, Linked List tidak memiliki batasan memori statis, sehingga log transaksi bisa bertambah terus menerus tanpa perlu *resize* manual.
-
-### 3. 📦 Operations Bay (The Pallet)
-* **Responsible:** Michdan
-* **Data Structure:** **Stack (LIFO - Last In First Out)**
-* **Logic:**
-    * Mensimulasikan tumpukan barang di atas palet atau di area loading.
-    * Barang yang terakhir diletakkan di tumpukan (Top) harus diambil/diproses terlebih dahulu.
-    * **Keunggulan:** Menangani logika pembatalan aksi (*Undo*) atau pengambilan barang tumpukan secara natural.
-
-### 4. 🚚 Order Processing (The Gate)
-* **Responsible:** Raja
-* **Data Structure:** **Queue (FIFO - First In First Out)**
-* **Logic:**
-    * Mengatur antrian pesanan pelanggan atau truk yang masuk ke area gudang.
-    * Pesanan yang datang lebih awal (Head) akan diproses lebih dulu daripada yang datang belakangan (Tail).
-    * **Keunggulan:** Menjamin prinsip keadilan (*Fairness*) dalam pemrosesan data.
-
-### 5. 🔍 Smart Indexing (The Catalog)
-* **Responsible:** Albani
-* **Data Structure:** **Binary Search Tree (BST) / AVL Tree**
-* **Logic:**
-    * Mengindeks seluruh item di gudang berdasarkan ID Barang.
-    * Memungkinkan fitur pencarian (*Searching*) yang sangat cepat.
-    * **Keunggulan:** Kompleksitas pencarian rata-rata **$O(\log n)$**. Jauh lebih cepat dibandingkan mencari satu per satu (Linear Search) pada data yang besar.
+### 5. 🔍 Pencarian ID Barang (Search)
+* **Penanggung Jawab:** Albani
+* **Menggunakan:** **Tree (Pohon Data)**
+* **Penjelasan:** * Fitur untuk mencari apakah sebuah barang ada di gudang atau tidak berdasarkan ID Barang.
+    * Dengan metode Tree, kita bisa mencari barang lebih cepat dengan memilah ID (kiri lebih kecil, kanan lebih besar), jadi tidak perlu mengecek rak satu per satu dari awal.
 
 ---
 
-## 👥 Team Contributors
+## 👥 Anggota Kelompok
 
-Project ini dikembangkan oleh **Kelompok [Nama Kelompok Kalian]**:
-
-| Name | Role | Focus Area |
-| :--- | :--- | :--- |
-| **Banu** | Core Engineer | `Array` Implementation |
-| **Bintang** | Backend Log | `Linked List` Implementation |
-| **Michdan** | Operations | `Stack` Logic |
-| **Raja** | Flow Manager | `Queue` System |
-| **Albani** | Algorithm Lead | `Tree` / `BST` Search |
+| Nama | Bagian |
+| :--- | :--- |
+| **Banu** | `Array` (List Rak Gudang) |
+| **Bintang** | `Linked List` (Catatan Barang Masuk) |
+| **Michdan** | `Stack` (Tumpukan Packing) |
+| **Raja** | `Queue` (Antrian Pesanan) |
+| **Albani** | `Tree` (Pencarian Barang) |
 
 ---
+
+## 💻 Cara Menjalankan
+1. Clone repo ini.
+2. Jalankan file `main.py` (atau `main.cpp`).
+3. Ikuti menu yang muncul di layar untuk simulasi gudang.

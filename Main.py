@@ -13,11 +13,11 @@ class Menu:
 
     def TambahData(self): # Bintang --
         print("Tambah Data")
-        # Tesseract.AddBarangBaru(101, "Aqua Botol 250ml", 20)
+        Tesseract.AddBarangBaru(101, "Aqua Botol 250ml", 20)
 
     def CekBarang(self): 
-        print("Reject Barang")
-        # Tesseract.TampilData()
+        print("Cek Barang")
+        Tesseract.TampilData()
 
     def SearchBarang(self): # Albani----
         print("Search Barang")
@@ -40,6 +40,7 @@ Tesseract = ListBarang.ListBarang("Werehouse.comp")
 
 if __name__ == "__main__":
     menu = Menu();
+    choice = 0
     while(True):
         os.system('cls')
         print(f"========== Management Gudang ==========")

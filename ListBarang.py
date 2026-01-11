@@ -20,6 +20,9 @@ class ListBarang:
     # def HapusBarang(self):
 
     def TampilData(self):
-        print(f"Daftar data Barang pada Gudang {self.NamaGudang}")
+        print(f"Daftar data Barang pada Gudang {self.NamaGudang} :\n")
+        print(f"{'Rak':<4} {'ID':<8} {'Nama Barang':<20} {'Stock':>5}")
+        print("-" * 45)
         for i, b in enumerate(self.ListBarangGudang, start=1):
-                print(f"{i}. {b.idBarang} - {b.NamaBarang} - {b.Stock}")
+            print(f"{i:<4} {b.idBarang:<8} {b.NamaBarang:<20} {b.Stock:>5}")
+

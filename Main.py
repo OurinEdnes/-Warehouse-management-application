@@ -6,20 +6,32 @@ class Menu:
             self.TambahData,
             self.RejectBarang,
             self.SearchBarang,
-            self.AddPesananCustumer
+            self.AddPesananCustumer,
+            self.CekPackingBarang
         ]
 
-    def TambahData(self):
+    def TambahData(self): # Bintang --
         print("Tambah Data")
 
-    def RejectBarang(self):
+    def RejectBarang(self): # Bintang --
         print("Reject Barang")
 
-    def SearchBarang(self):
+    def SearchBarang(self): # Albani----
         print("Search Barang")
 
-    def AddPesananCustumer(self):
+    def AddPesananCustumer(self): # Raja---
         print("Add Pesanan Customer")
+
+    def CekPackingBarang(self): # Michdan---
+        print("Add Pesanan Customer")   
+
+    def run(self, i):
+        if 1 <= i <= len(self.menu_func):
+            self.menu_func[i]
+            return
+        else:
+            print("Menu Tidak Tersedia!!")
+            return
 
 
 if __name__ == "__main__":
@@ -32,6 +44,7 @@ if __name__ == "__main__":
         print("2. Reject Barang. ")
         print("3. Cari barang. ")
         print("4. Add Pesanan Barang. ")
+        print("5. Cek Packing Barang. ")
         print("0. Keluar. ")
         choice = int(input("Pilih Menu: "))
         if(choice == 0):

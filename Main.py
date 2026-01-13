@@ -5,6 +5,7 @@ class Menu:
     def __init__(self):
         self.menu_func = [
             self.TambahData,
+            self.rejectBarang,
             self.CekBarang,
             self.SearchBarang,
             self.AddPesananCustumer,
@@ -14,6 +15,9 @@ class Menu:
     def TambahData(self): # Bintang --
         print("Tambah Data")
         Tesseract.AddBarangBaru(101, "Aqua Botol 250ml", 20)
+
+    def rejectBarang(self): 
+        print("rejectBarang")
 
     def CekBarang(self): 
         print("Cek Barang")
@@ -46,10 +50,11 @@ if __name__ == "__main__":
         print(f"========== Management Gudang ==========")
         print("Menu Gudang: ")
         print("1. Add Barang Baru. ")
-        print("2. Cek Barang. ")
-        print("3. Cari barang. ")
-        print("4. Add Pesanan Barang. ")
-        print("5. Cek Packing Barang. ")
+        print("2. Reject Barang. ")
+        print("3. Cek Barang. ")
+        print("4. Cari barang. ")
+        print("5. Add Pesanan Barang. ")
+        print("6. Cek Packing Barang. ")
         print("0. Keluar. ")
         choice = int(input("Pilih Menu: "))
         if(choice <= 0):

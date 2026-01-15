@@ -15,7 +15,7 @@ Project ini adalah simulasi sistem manajemen gudang untuk memenuhi tugas Struktu
 
 Berikut adalah penjelasan teknis bagaimana setiap struktur data bekerja dalam ekosistem gudang kami:
 
-### 1. 🗄️ Manajemen Rak Gudang (Storage)
+### 1. Manajemen Rak Gudang (Storage)
 * **Penanggung Jawab:** Banu
 * **Menggunakan:** **Array**
 * **Fungsi:** Menyimpan data fisik barang di rak.

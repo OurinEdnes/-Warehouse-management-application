@@ -32,21 +32,31 @@ class Menu:
 
 
     def CekPackingBarang(self):  # Michdan — STACK
-    print("=== PROSES PACKING BARANG (STACK / TROLI) ===")
+        print("=== PROSES PACKING BARANG (STACK / TROLI) ===")
 
-    # STEP 1: Push barang ke troli (contoh 3 barang pertama)
-    for i in range(min(3, len(Tesseract.ListBarangGudang))):
-        barang = Tesseract.ListBarangGudang[i]
-        Troli.push(barang)
+        # STEP 1: Push barang ke troli (contoh 3 barang pertama)
+        for i in range(min(3, len(Tesseract.ListBarangGudang))):
+            barang = Tesseract.ListBarangGudang[i]
+            Troli.push(barang)
 
-    Troli.tampil_troli()
+        Troli.tampil()
+        Truk.tampil()
 
-    # STEP 2: Pop barang ke truk (LIFO)
-    print("\nSusun barang ke truk:")
-    while not Troli.is_empty():
-        Troli.pop()
+        pilih = input("\nLanjutkan memindahkan barang ke truk? (y/n): ")
+        if pilih.lower() != 'y':
+            print("Proses pemindahan dibatalkan.")
+            return
 
 
+
+        # STEP 2: Pop barang ke truk (LIFO)
+        print("\nSusun barang ke truk:")
+        while not Troli.is_empty():
+            Truk.push(Troli.pop())
+
+
+
+        
 
     def run(self, i):
         if 0 <= i < len(self.menu_func):
@@ -58,6 +68,9 @@ class Menu:
 
 Tesseract = ListBarang.ListBarang("Werehouse.comp")
 Troli = StackBarang.StackBarang()
+Truk = StackBarang.StackBarang()
+Troli.set_nama("Troli")
+Truk.set_nama("Truk")
 
 
 if __name__ == "__main__":

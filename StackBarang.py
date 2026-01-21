@@ -17,7 +17,7 @@ class StackBarang:
         
         barang = self.stack.pop()
        
-        print(f"[POP] Barang {barang.NamaBarang} dipindahkan ke truk")
+        print(f"[POP] Barang {barang.NamaBarang} dipindahkan dari {self.nama} ke truk")
         return barang
 
     def is_empty(self):

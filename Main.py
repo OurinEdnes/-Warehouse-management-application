@@ -52,7 +52,8 @@ class Menu:
         # STEP 2: Pop barang ke truk (LIFO)
         print("\nSusun barang ke truk:")
         while not Troli.is_empty():
-            Truk.push(Troli.pop())
+             Troli.pop()
+            # Truk.push(barang)
 
 
 

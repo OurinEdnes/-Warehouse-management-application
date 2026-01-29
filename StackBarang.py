@@ -20,7 +20,7 @@ class StackBarang:
         if self.is_empty():
             self.Top = Pack
         else:
-            self.Top.next = Pack
+            Pack.next = self.Top
             self.Top = Pack
 
         self.Isi += 1

@@ -134,6 +134,49 @@ class Menu:
             return
 
 if __name__ == "__main__":
+   # ================= DUMMY DATA =================
+    # Barang awal di gudang
+    idx1 = Search.compare("Laptop")
+    Tesseract.AddBarangBaru(101, "Laptop", 15, idx1)
+    History.TambahData(101, "Laptop", 15, "Initial Stock")
+
+    idx2 = Search.compare("Mouse")
+    Tesseract.AddBarangBaru(102, "Mouse", 40, idx2)
+    History.TambahData(102, "Mouse", 40, "Initial Stock")
+
+    idx3 = Search.compare("Keyboard")
+    Tesseract.AddBarangBaru(103, "Keyboard", 25, idx3)
+    History.TambahData(103, "Keyboard", 25, "Initial Stock")
+
+    idx4 = Search.compare("Monitor")
+    Tesseract.AddBarangBaru(104, "Monitor", 10, idx4)
+    History.TambahData(104, "Monitor", 10, "Initial Stock")
+
+    idx5 = Search.compare("Flashdisk")
+    Tesseract.AddBarangBaru(105, "Flashdisk", 50, idx5)
+    History.TambahData(105, "Flashdisk", 50, "Initial Stock")
+
+    # ========== DUMMY QUEUE (PESANAN CUSTOMER) ==========
+    Pelanggan.enqueue(201, "Budi", "Laptop", 1)
+    Pelanggan.enqueue(202, "Siti", "Mouse", 2)
+    Pelanggan.enqueue(203, "Andi", "Keyboard", 1)
+    Pelanggan.enqueue(204, "Rina", "Flashdisk", 5)
+    Pelanggan.enqueue(205, "Dewi", "Monitor", 1)
+
+    History.TambahData(201, "Laptop", 1, "Pesanan Barang")
+    History.TambahData(202, "Mouse", 2, "Pesanan Barang")
+    History.TambahData(203, "Keyboard", 1, "Pesanan Barang")
+    History.TambahData(204, "Flashdisk", 5, "Pesanan Barang")
+    History.TambahData(205, "Monitor", 1, "Pesanan Barang")
+
+    # ========== DUMMY STACK (TROLI / PACKING) ==========
+    Troli.push(201, "Budi", "Laptop")
+    Troli.push(202, "Siti", "Mouse")
+    Troli.push(203, "Andi", "Keyboard")
+    Troli.push(204, "Rina", "Flashdisk")
+    Troli.push(205, "Dewi", "Monitor")
+
+    # --------------------------------------------
     menu = Menu();
     choice = 0
     while(True):

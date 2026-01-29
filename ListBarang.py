@@ -16,23 +16,23 @@ class ListBarang:
     def AddBarangBaru(self, id, nama, stockAwal, idx):
         if idx is not None:
             self.AddStock(idx, stockAwal)
-            return
+            return 2
         
         if self.index >= len(self.ListBarangGudang):
             print("Gudang penuh! Tidak bisa menambah barang baru.")
-            return False
+            return None
     
         barang_baru = Barang(id, nama, stockAwal)
         for i in range(self.index):
             if self.ListBarangGudang[i] is None:
                 barang_baru.indexBarang = i
                 self.ListBarangGudang[i] = barang_baru
-                return True
+                return 1
         
         barang_baru.indexBarang = self.index
         self.ListBarangGudang[self.index] = barang_baru
         self.index += 1
-        return True
+        return 1
         # self.ListBarangGudang.append(barang_baru)
     def AddStock(self, idx, value):
         self.ListBarangGudang[idx].Stock += value

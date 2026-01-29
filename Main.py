@@ -34,7 +34,8 @@ class Menu:
         # Bridging ------------
         idx = Search.compare(NamaBarang)
         Pass = Tesseract.AddBarangBaru(Id, NamaBarang, Stock, idx)
-        if Pass : History.TambahData(Id, NamaBarang, Stock, "Penambahan Barang")
+        if Pass == 1: History.TambahData(Id, NamaBarang, Stock, "Penambahan Barang")
+        elif Pass == 2: History.TambahData(Id, NamaBarang, Stock, "Restock Barang")
         self.RestTree()
 
     def HistoryBarang(self):
@@ -77,7 +78,7 @@ class Menu:
                 return
             Pelanggan.enqueue(idp,nama,nmb,jml)
             Troli.push(idp, nama, nmb)
-            History.TambahData(idxb, nmb, jml, "Pesanan Barang")
+            History.TambahData(idp, nmb, jml, "Pesanan Barang")
 
             return
         elif inp == 2:
@@ -85,7 +86,7 @@ class Menu:
             return
         elif inp == 3:
             print("\n=== Front Pesanan ===")
-            if Truk is None :
+            if Truk.Top is None :
                 print("Barang Belum dimasukan kedalam Truk! ---")
                 return
 
@@ -98,13 +99,16 @@ class Menu:
         Troli.tampil()
         Truk.tampil()
 
-        print("Truk Hanya Dapat disi jika kapasitas Packing mencapai 10!")
-        pilih = input("\nLanjutkan memindahkan barang ke truk? (y/n): ")
+        print("\nTruk Hanya Dapat disi jika kapasitas Packing mencapai 10!")
+        pilih = input("Lanjutkan memindahkan barang ke truk? (y/n): ")
         if pilih.lower() != 'y':
             print("Proses pemindahan dibatalkan.")
             return
-        elif Truk is not None :
+        elif Truk.Top is not None :
             print("Harap Kirim terlebih dahulu pesanan yang ada di truck! --")
+            return
+        elif Troli.Isi < 5 :
+            print("Tidak bisa dimuat kedalam truk, harap memiliki setidaknya 5 packing")
             return
         
         else:

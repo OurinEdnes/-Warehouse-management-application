@@ -28,7 +28,7 @@ class StackBarang:
 
     def pop(self):
         if self.is_empty():
-            print("Troli kosong!")
+            print(f"{self.nama} kosong!")
             return None
         
         barang = self.Top

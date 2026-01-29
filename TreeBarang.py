@@ -45,7 +45,7 @@ class TreeBarang:
     def cari_barang(self, kode):
         hasil = self._cari(self.akar, kode)
         if hasil is not None:
-            return hasil.kode
+            return hasil
         else:
             print("Barang Tidak Ada!")
             return None
@@ -54,12 +54,11 @@ class TreeBarang:
         if node is None:
             return None
         if node.nama == kode:
-            return node
-        elif kode < node.kode:
+            return node.kode
+        elif kode < node.nama:
             return self._cari(node.kiri, kode)
         else:
             return self._cari(node.kanan, kode)
-        
 
     def Cetak(self):
         self._cetak(self.akar)
@@ -72,8 +71,35 @@ class TreeBarang:
         print(node.kode, node.nama)
         self._cetak(node.kanan)
 
+    def RestTree(self, key):
+        self.akar = self.RestMain(self.akar, key)
+
+    def NodeUp_Rest(self, node):
+        current = node
+        while current.kiri is not None:
+            current.kiri
+        return current
+
+    def RestMain(self, node, key):
+        if node is None:
+            return None
+        if node.nama > key:
+            node = self.RestMain(node.kiri, key)
+        elif node.nama < key:
+            node = self.RestMain(node.kanan, key)
+        else:
+            if node.kiri is None:
+                return node.kanan
+            elif node.kanan is None:
+                return node.kiri
+            
+            temp = self.NodeUp_Rest(node)
+            node = temp
+            node.kanan = self.RestMain(node.kanan, temp.nama)
+        return
 
 
+                
 # # =========================
 # # SIMULASI PROGRAM GUDANG
 # # =========================

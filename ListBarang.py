@@ -1,3 +1,4 @@
+
 class Barang:
     def __init__(self, id, nama, stock):
         self.idBarang = id
@@ -15,17 +16,29 @@ class ListBarang:
     def AddBarangBaru(self, id, nama, stockAwal):
         if self.index >= len(self.ListBarangGudang):
             print("Gudang penuh! Tidak bisa menambah barang baru.")
-            return
+            return False
     
         barang_baru = Barang(id, nama, stockAwal)
+        for i in range(self.index):
+            if self.ListBarangGudang[i] is None:
+                barang_baru.indexBarang = i
+                self.ListBarangGudang[i] = barang_baru
+                return True
+        
+        barang_baru.indexBarang = self.index
         self.ListBarangGudang[self.index] = barang_baru
         self.index += 1
+        return True
 
         # self.ListBarangGudang.append(barang_baru)
 
-    # def PerebahanBarangBarang(self):
+    def PerebahanBarangBarang(self):
 
-    # def HapusBarang(self):
+        return
+    
+    def HapusBarang(self, idx):
+        self.ListBarangGudang[idx] = None
+        return
 
     def TampilData(self):
         print(f"Daftar data Barang pada Gudang {self.NamaGudang} :\n")
@@ -34,6 +47,7 @@ class ListBarang:
 
         for i in range(self.index):
             b = self.ListBarangGudang[i]
+            if b is None : continue
             print(f"{i+1:<4} {b.idBarang:<5} {b.NamaBarang:<20} {b.Stock:>5}")
 
     def TampilkanDataSearchIndx(self, idx):
@@ -52,3 +66,7 @@ class ListBarang:
         if b is None:
             return None
         return b.NamaBarang
+    
+    def getAll(self, idx):
+        barang = self.ListBarangGudang[idx]
+        return barang.idBarang, barang.NamaBarang, barang.Stock

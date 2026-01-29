@@ -1,39 +1,55 @@
+import datetime
+
+class Pelanggan:
+    def __init__(self, id, nama, waktu, barang):
+        self.IdPelangan = id
+        self.NamaPelangggan = nama
+        self.Barang = barang
+        self.waktu_Pemroses = waktu
+        self.next = None
+
 class StackBarang:
-    def __init__(self):
-        self.nama = " "
-        self.stack = []
-
-    def set_nama(self, nama):
+    def __init__(self, nama):
         self.nama = nama
+        self.Top = None
+        self.Isi = 0
 
-    def push(self, barang):
-        self.stack.append(barang)
-        print(f"[PUSH] Barang {barang.NamaBarang} masuk ke {self.nama}")
+    def push(self, id, nama, barang):
+        waktu = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        Pack = Pelanggan(id, nama, waktu, barang)
+        if self.is_empty():
+            self.Top = Pack
+        else:
+            self.Top.next = Pack
+            self.Top = Pack
+
+        self.Isi += 1
+        print(f"[PUSH] Packing pesanan atas nama {nama} ---")
 
     def pop(self):
         if self.is_empty():
             print("Troli kosong!")
             return None
         
-        barang = self.stack.pop()
+        barang = self.Top
+        self.Top = self.Top.next
        
-        print(f"[POP] Barang {barang.NamaBarang} dipindahkan dari {self.nama} ke truk")
-        return barang
+        self.Isi -= 1
+        print(f"[POP] Barang {barang.NamaPelangggan} dipindahkan ke truk")
+        return barang.IdPelangan, barang.NamaPelangggan, barang.Barang
 
     def is_empty(self):
-        return len(self.stack) == 0
-    
-    
+        return self.Top is None
 
     def tampil(self):
         print(f"\nIsi {self.nama} (atas ke bawah):")
         if self.is_empty():
             print(f"{self.nama} kosong.")
             return
-        for b in reversed(self.stack):
-            print(f"- {b.NamaBarang}")
-
-
-    
-    
-    
+        
+        current = self.Top
+        i = 1
+        while current is not None:
+            print(f"{i}. Pesanan atas nama {current.NamaPelangggan} | Dengan Kode {current.IdPelangan}")
+            current = current.next
+            i += 1

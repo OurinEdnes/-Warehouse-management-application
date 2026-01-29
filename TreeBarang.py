@@ -36,8 +36,6 @@ class TreeBarang:
                 node.kanan = BarangNode(kode, nama)
             else:
                 self._tambah(node.kanan, kode, nama)
-        else:
-            print("Kode barang sudah ada!")
 
     # =========================
     # SEARCH BARANG
@@ -71,6 +69,24 @@ class TreeBarang:
         print(node.kode, node.nama)
         self._cetak(node.kanan)
 
+
+# Bridging --------------------
+    def compare(self, kode):
+        hasil = self.compare_(self.akar, kode)
+        if hasil is not None:
+            return hasil
+        else:
+            return None
+    
+    def compare_(self, node, kode):
+        if node is None:
+            return None
+        if node.nama == kode:
+            return node.kode
+        elif kode < node.nama:
+            return self.compare_(node.kiri, kode)
+        else:
+            return self.compare_(node.kanan, kode)  
                 
 # # =========================
 # # SIMULASI PROGRAM GUDANG

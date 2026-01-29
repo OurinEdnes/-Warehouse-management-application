@@ -13,7 +13,11 @@ class ListBarang:
         self.index = 0
 
 
-    def AddBarangBaru(self, id, nama, stockAwal):
+    def AddBarangBaru(self, id, nama, stockAwal, idx):
+        if idx is not None:
+            self.AddStock(idx, stockAwal)
+            return
+        
         if self.index >= len(self.ListBarangGudang):
             print("Gudang penuh! Tidak bisa menambah barang baru.")
             return False
@@ -29,12 +33,25 @@ class ListBarang:
         self.ListBarangGudang[self.index] = barang_baru
         self.index += 1
         return True
-
         # self.ListBarangGudang.append(barang_baru)
-
-    def PerebahanBarangBarang(self):
-
+    def AddStock(self, idx, value):
+        self.ListBarangGudang[idx].Stock += value
         return
+
+    def PerebahanBarangBarang(self, keyValue, id):
+        if self.ListBarangGudang[id].Stock == 0:
+            print("Barang Sudah Habis Harap pesan barang lain! --")
+            return None
+
+        if self.ListBarangGudang[id].Stock - keyValue < 0:
+            print("Pesanan melebihi jumlah stock tersedia! ")
+            print("Pesanan akan secara otomatis menjadi banyaknya sisa stock yang tersedia! ")
+            temp = self.ListBarangGudang[id].Stock
+            self.ListBarangGudang[id].Stock = 0
+            return temp
+
+        self.ListBarangGudang[id].Stock -= keyValue
+        return keyValue
     
     def HapusBarang(self, idx):
         self.ListBarangGudang[idx] = None
@@ -53,7 +70,7 @@ class ListBarang:
     def TampilkanDataSearchIndx(self, idx):
         b = self.ListBarangGudang[idx]
         print("Barang Ditemukan : ")
-        print(f"Barang : {b.idBarang:<3} | {b.NamaBarang:<20} | {b.Stock:>5}")
+        print(f"Barang : {b.idBarang:<3} | {b.NamaBarang:<10} | {b.Stock:>5}")
 
     def GetIndex(self, i):
         b = self.ListBarangGudang[i]

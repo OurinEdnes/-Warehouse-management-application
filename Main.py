@@ -7,12 +7,11 @@ import os
 # ==============================================
 
 Tesseract = ListBarang.ListBarang("Werehouse.comp")
-Troli = StackBarang.StackBarang()
-Truk = StackBarang.StackBarang()
-Troli.set_nama("Troli")
-Truk.set_nama("Truk")
+Troli = StackBarang.StackBarang("Troli")
+Truk = StackBarang.StackBarang("Truk")
 Search = TreeBarang.TreeBarang()
 History = LInked_List.LinkedList()
+Pelanggan = QUEUE.AntrianPengiriman()
 
 # --------------------------------------------
 
@@ -20,12 +19,10 @@ class Menu:
     def __init__(self):
         self.menu_func = [
             self.TambahData,
-            self.rejectBarang,
             self.HistoryBarang,
             self.CekBarang,
             self.SearchBarang,
-            self.AddPesananCustumer,
-            self.CekCustumer,
+            self.PesananCustumer,
             self.CekPackingBarang
         ]
 
@@ -34,24 +31,11 @@ class Menu:
         Id = int(input("Masukan Id Barang: "))
         NamaBarang = str(input("Masukan Nama Barang: "))
         Stock = int(input("Masukan Stock Barang: "))
-        Pass = Tesseract.AddBarangBaru(Id, NamaBarang, Stock)
+        # Bridging ------------
+        idx = Search.compare(NamaBarang)
+        Pass = Tesseract.AddBarangBaru(Id, NamaBarang, Stock, idx)
         if Pass : History.TambahData(Id, NamaBarang, Stock, "Penambahan Barang")
         self.RestTree()
-
-    def rejectBarang(self): 
-        print("\n=== Reject Barang ===")
-        id = str(input("Masukan Nama barang: "))
-        idx = Search.cari_barang(id)
-
-        if idx:
-            Search.RestTree(id)
-            idq, nama, stock = Tesseract.getAll(idx)
-            Tesseract.HapusBarang(idx)
-            History.TambahData(idq, nama, stock, "Penghapusan Barang")
-            print("Barang Sudah DiReject! --")
-            return
-        
-        print("Barangg Gagal DiReject! --")
 
     def HistoryBarang(self):
         print("\n=== HISTORY BARANG ===")
@@ -72,33 +56,63 @@ class Menu:
 
         Tesseract.TampilkanDataSearchIndx(index)
         
-    def AddPesananCustumer(self): # Raja---
-        print("\n=== Add Pesanan Customer ===")
+    def PesananCustumer(self): # Raja---
+        print("1. Tambah Pesanan. ")
+        print("2. Cek Pesanan Customer. ")
+        print("3. Pesanan Front Selesai. ")
+        inp = int(input("Masukan Pilhan: "))
+        if inp == 1:
+            print("\n=== Add Pesanan Customer ===")
+            idp = int(input("Masukan ID Pelanggan: "))
+            nama = str(input("Masukan Nama Pelanggan: "))
+            nmb = str(input("Masukan Nama Barang: "))
+            jml = int(input("Masukan Jumlah Barang: "))
+            idxb = Search.cari_barang(nmb)
+            if idxb is None: 
+                print("Barang tidak ditemukan! --")
+                return
+            
+            jml = Tesseract.PerebahanBarangBarang(jml, idxb)
+            if jml is None :
+                return
+            Pelanggan.enqueue(idp,nama,nmb,jml)
+            Troli.push(idp, nama, nmb)
+            History.TambahData(idxb, nmb, jml, "Pesanan Barang")
 
-    def CekCustumer(self):
-        return
+            return
+        elif inp == 2:
+            Pelanggan.tampilkan_antrean()
+            return
+        elif inp == 3:
+            print("\n=== Front Pesanan ===")
+            if Truk is None :
+                print("Barang Belum dimasukan kedalam Truk! ---")
+                return
+
+            Pelanggan.dequeue()
+            Truk.pop()
+            return
 
     def CekPackingBarang(self):  # Michdan — STACK
         print("=== PROSES PACKING BARANG (STACK / TROLI) ===")
-
-        # STEP 1: Push barang ke troli (contoh 3 barang pertama)
-        for i in range(len(Tesseract.ListBarangGudang)):
-            barang = Tesseract.ListBarangGudang[i]
-            Troli.push(barang)
-
         Troli.tampil()
         Truk.tampil()
 
+        print("Truk Hanya Dapat disi jika kapasitas Packing mencapai 10!")
         pilih = input("\nLanjutkan memindahkan barang ke truk? (y/n): ")
         if pilih.lower() != 'y':
             print("Proses pemindahan dibatalkan.")
             return
-
-        # STEP 2: Pop barang ke truk (LIFO)
-        print("\n---- Susun barang ke truk:")
-        while not Troli.is_empty():
-             Troli.pop()
-            # Truk.push(barang)
+        elif Truk is not None :
+            print("Harap Kirim terlebih dahulu pesanan yang ada di truck! --")
+            return
+        
+        else:
+            print("\n---- Susun barang ke truk:")
+            while not Troli.is_empty():
+                if Truk.Isi > 10 : break
+                id, nama, barang = Troli.pop()
+                Truk.push(id, nama, barang)
 
     def RestTree(self):
         for i in range(len(Tesseract.ListBarangGudang)):
@@ -106,7 +120,6 @@ class Menu:
             Nama = Tesseract.GetNama(i)
             if Index == None : continue
             Search.tambah_barang(Index, Nama)
-            Search.Cetak()
 
     def run(self, i):
         if 0 <= i < len(self.menu_func):
@@ -123,14 +136,12 @@ if __name__ == "__main__":
         os.system('cls')
         print(f"========== Management Gudang ==========")
         print("Menu Gudang: ")
-        print("1. Add Barang Baru. ")
-        print("2. Reject Barang. ")
-        print("3. History Barang. (Linked-List)")
-        print("4. Cek Barang. (List)")
-        print("5. Cari barang. ")
-        print("6. Add Pesanan Barang. ")
-        print("7. Cek Pemesan. (Queue) ")
-        print("8. Cek Packing Barang. (Stack) ")
+        print("1. Add Barang. ")
+        print("2. History Barang. (Linked-List)")
+        print("3. Cek Barang. (List)")
+        print("4. Cari barang. ")
+        print("5. Pesanan Barang. ")
+        print("6. Cek Packing Barang. (Stack) ")
         print("0. Keluar. ")
         choice = int(input("Pilih Menu: "))
         if(choice <= 0):

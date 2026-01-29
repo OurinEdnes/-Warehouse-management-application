@@ -1,6 +1,9 @@
 import ListBarang
 import StackBarang
+import QUEUE
+import TreeBarang
 import os
+# ==============================================
 
 class Menu:
     def __init__(self):
@@ -25,8 +28,12 @@ class Menu:
         Tesseract.TampilData()
 
     def SearchBarang(self): # Albani----
-        print("Search Barang")
-
+        self.RestTree()
+        print("\n=== Search Barang ===")
+        Id = str(input("Masukan Nama Barang : "))
+        index = Search.cari_barang(Id)
+        Tesseract.TampilkanDataSearchIndx(index)
+        
     def AddPesananCustumer(self): # Raja---
         print("Add Pesanan Customer")
 
@@ -47,17 +54,18 @@ class Menu:
             print("Proses pemindahan dibatalkan.")
             return
 
-
-
         # STEP 2: Pop barang ke truk (LIFO)
         print("\nSusun barang ke truk:")
         while not Troli.is_empty():
              Troli.pop()
             # Truk.push(barang)
 
-
-
-        
+    def RestTree(self):
+        for i in range(len(Tesseract.ListBarangGudang)):
+            Index = Tesseract.GetIndex(i)
+            Nama = Tesseract.GetNama(i)
+            if Index == None : continue
+            Search.tambah_barang(Index, Nama)
 
     def run(self, i):
         if 0 <= i < len(self.menu_func):
@@ -72,6 +80,7 @@ Troli = StackBarang.StackBarang()
 Truk = StackBarang.StackBarang()
 Troli.set_nama("Troli")
 Truk.set_nama("Truk")
+Search = TreeBarang.TreeBarang()
 
 
 if __name__ == "__main__":

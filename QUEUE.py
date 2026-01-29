@@ -7,7 +7,6 @@ class AntrianPengiriman:
         self.queue = deque()
 
     def enqueue(self, id_pesanan, nama_pelanggan, id_barang, jumlah):
-
         waktu = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         pesanan = {
             "id_pesanan": id_pesanan,
@@ -17,20 +16,18 @@ class AntrianPengiriman:
             "waktu_permintaan": waktu
         }
         self.queue.append(pesanan)
-        print(f"📌 [ENQUEUE] Pesanan {id_pesanan} milik {nama_pelanggan} masuk antrean.")
+        print(f"[ENQUEUE] Pesanan {id_pesanan} milik {nama_pelanggan} masuk antrean.")
 
     def dequeue(self):
-
         if not self.is_empty():
             pesanan_diproses = self.queue.popleft()
-            print(f"🚚 [DEQUEUE] Memproses pengiriman {pesanan_diproses['id_pesanan']}...")
+            print(f"[DEQUEUE] Memproses pengiriman {pesanan_diproses['id_pesanan']}...")
             return pesanan_diproses
         else:
-            print("⚠️ Antrean kosong, tidak ada barang yang dikirim.")
+            print("Antrean kosong, tidak ada barang yang dikirim.")
             return None
 
     def tampilkan_antrean(self):
-
         print("\n=== DAFTAR ANTREAN GUDANG SAAT INI ===")
         if self.is_empty():
             print("Kosong")
@@ -40,8 +37,6 @@ class AntrianPengiriman:
 
     def is_empty(self):
         return len(self.queue) == 0
-
-
 
 gudang = AntrianPengiriman()
 

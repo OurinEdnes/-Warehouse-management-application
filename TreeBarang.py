@@ -26,12 +26,12 @@ class TreeBarang:
             self._tambah(self.akar, kode, nama)
 
     def _tambah(self, node, kode, nama):
-        if kode < node.kode:
+        if nama.lower() < node.nama.lower():
             if node.kiri is None:
                 node.kiri = BarangNode(kode, nama)
             else:
                 self._tambah(node.kiri, kode, nama)
-        elif kode > node.kode:
+        else:
             if node.kanan is None:
                 node.kanan = BarangNode(kode, nama)
             else:
@@ -59,16 +59,21 @@ class TreeBarang:
             return self._cari(node.kanan, kode)
 
     def Cetak(self):
-        self._cetak(self.akar)
+        print("=== CETAK TREE (In-Order) ===")
+        self._cetak(self.akar, "ROOT")
 
-    def _cetak(self, node):
+    def _cetak(self, node, posisi):
         if node is None:
             return
-
-        self._cetak(node.kiri)
-        print(node.kode, node.nama)
-        self._cetak(node.kanan)
-
+        
+        # KIRI
+        self._cetak(node.kiri, "KIRI")
+        
+        # NODE SEKARANG
+        print(f"[{posisi}] Kode: {node.kode}, Nama: {node.nama}")
+        
+        # KANAN
+        self._cetak(node.kanan, "KANAN")
 
 # Bridging --------------------
     def compare(self, kode):

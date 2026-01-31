@@ -7,11 +7,18 @@ class Barang:
         self.Stock = stock
 
 class ListBarang:
-    def __init__(self, company,Maxi = 10):
+    def __init__(self, company,Maxi = 6):
         self.NamaGudang = company
         self.ListBarangGudang = [None] * Maxi
         self.index = 0
 
+    def Resize(self):
+        NewSize = len(self.ListBarangGudang) * 2
+        ResizeSection = [None] * NewSize
+        for i in range(len(self.ListBarangGudang)):
+            ResizeSection[i] = self.ListBarangGudang[i]
+
+        self.ListBarangGudang = ResizeSection
 
     def AddBarangBaru(self, id, nama, stockAwal, idx):
         if idx is not None:
@@ -19,8 +26,16 @@ class ListBarang:
             return 2
         
         if self.index >= len(self.ListBarangGudang):
-            print("Gudang penuh! Tidak bisa menambah barang baru.")
-            return None
+            pilih = str(input("Gudang Penuh! Ingin Menambah kapasitas Rak? (Y/N)")).lower
+            if pilih == "y":
+                return None
+            else:
+                self.Resize()
+                barang_baru = Barang(id, nama, stockAwal)
+                barang_baru.indexBarang = self.index
+                self.ListBarangGudang[self.index] = barang_baru
+                self.index += 1
+                return 1
     
         barang_baru = Barang(id, nama, stockAwal)
         for i in range(self.index):
@@ -33,7 +48,7 @@ class ListBarang:
         self.ListBarangGudang[self.index] = barang_baru
         self.index += 1
         return 1
-        # self.ListBarangGudang.append(barang_baru)
+
     def AddStock(self, idx, value):
         self.ListBarangGudang[idx].Stock += value
         return

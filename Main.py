@@ -43,7 +43,7 @@ class Menu:
         History.Traverse()
 
     def CekBarang(self): 
-        print("\n=== Cek Barang ===")
+        print("\n=== Cek Barang ===") 
         Tesseract.TampilData()
 
     def SearchBarang(self): # Albani----
@@ -53,6 +53,7 @@ class Menu:
         index = Search.cari_barang(Id)
         if index is None:
             print("Data Tidak Ditemukan! --")
+            Search.Cetak()
             return
 
         Tesseract.TampilkanDataSearchIndx(index)
@@ -155,6 +156,7 @@ if __name__ == "__main__":
     idx5 = Search.compare("Flashdisk")
     Tesseract.AddBarangBaru(105, "Flashdisk", 50, idx5)
     History.TambahData(105, "Flashdisk", 50, "Initial Stock")
+    
 
     # ========== DUMMY QUEUE (PESANAN CUSTOMER) ==========
     Pelanggan.enqueue(201, "Budi", "Laptop", 1)

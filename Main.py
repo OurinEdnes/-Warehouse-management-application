@@ -189,7 +189,7 @@ if __name__ == "__main__":
         print("2. History Barang. (Linked-List)")
         print("3. Cek Barang. (List)")
         print("4. Cari barang. (Tree)")
-        print("5. Pesanan Barang. ")
+        print("5. Pesanan Barang. (Queue)")
         print("6. Cek Packing Barang. (Stack) ")
         print("0. Keluar. ")
         choice = int(input("Pilih Menu: "))

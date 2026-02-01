@@ -188,7 +188,7 @@ if __name__ == "__main__":
         print("1. Add Barang. ")
         print("2. History Barang. (Linked-List)")
         print("3. Cek Barang. (List)")
-        print("4. Cari barang. ")
+        print("4. Cari barang. (Tree)")
         print("5. Pesanan Barang. ")
         print("6. Cek Packing Barang. (Stack) ")
         print("0. Keluar. ")

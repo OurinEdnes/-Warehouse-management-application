@@ -43,13 +43,20 @@ class StackBarang:
 
     def tampil(self):
         print(f"\nIsi {self.nama} (atas ke bawah):")
+
         if self.is_empty():
             print(f"{self.nama} kosong.")
             return
         
         current = self.Top
         i = 1
-        while current is not None:
-            print(f"{i}. Pesanan atas nama {current.NamaPelangggan} | Dengan Kode {current.IdPelangan}")
+        while current:
+            print(
+                f"{i}. "
+                f"Nama: {current.NamaPelangggan} | "
+                f"ID: {current.IdPelangan} | "
+                f"Barang: {current.Barang:<15} | "
+                f"Waktu: {current.waktu_Pemroses}"
+            )
             current = current.next
             i += 1

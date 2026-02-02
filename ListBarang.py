@@ -38,11 +38,11 @@ class ListBarang:
                 return 1
     
         barang_baru = Barang(id, nama, stockAwal)
-        for i in range(self.index):
-            if self.ListBarangGudang[i] is None:
-                barang_baru.indexBarang = i
-                self.ListBarangGudang[i] = barang_baru
-                return 1
+        # for i in range(self.index):
+        #     if self.ListBarangGudang[i].Stock == 0:
+        #         barang_baru.indexBarang = i
+        #         self.ListBarangGudang[i] = barang_baru
+        #         return 1
         
         barang_baru.indexBarang = self.index
         self.ListBarangGudang[self.index] = barang_baru

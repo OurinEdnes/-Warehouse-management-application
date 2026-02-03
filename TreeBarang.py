@@ -4,7 +4,7 @@
 # =========================
 
 class BarangNode:
-    def __init__(self, kode, nama):
+    def _init_(self, kode, nama):
         self.kode = kode          # ID Barang
         self.nama = nama          # Nama Barang
         #-------------------------------------
@@ -13,7 +13,7 @@ class BarangNode:
 
 
 class TreeBarang:
-    def __init__(self):
+    def _init_(self):
         self.akar = None
 
     # =========================
@@ -40,29 +40,31 @@ class TreeBarang:
     # =========================
     # SEARCH BARANG
     # =========================
-    def cari_barang(self, nama, section):
-        hasil = self._cari(self.akar, nama)
+    def cari_barang(self, kode, section):#untuk ngasih tahu untuk apa.
+        hasil = self._cari(self.akar, kode)#ada dua pilihan none atau index data yang dicari
+        
         if hasil is not None:
-            return hasil
+           return hasil
         else:
             if section == "Search":
                 print("Barang Tidak Ada!")
             return None
     
-    def _cari(self, node, nama):
+    def _cari(self, node, kode):
         if node is None:
             return None
-        if node.nama == nama:
+        if node.nama == kode:
             return node.kode
-        elif nama < node.nama:
-            return self._cari(node.kiri, nama)
+        #bagian perbandingan 
+        elif kode < node.nama:
+            return self._cari(node.kiri, kode)
         else:
-            return self._cari(node.kanan, nama)
+            return self._cari(node.kanan, kode)
 
     def Cetak(self):
         print("=== CETAK TREE (In-Order) ===")
         self._cetak(self.akar, "ROOT")
-
+ 
     def _cetak(self, node, posisi):
         if node is None:
             return
@@ -76,10 +78,51 @@ class TreeBarang:
         # KANAN
         self._cetak(node.kanan, "KANAN")
 
+# =========================
+# DELETE BARANG (BERDASARKAN NAMA)
+# =========================
+def hapus_barang(self, nama):
+    self.akar = self._hapus(self.akar, nama)
+
+def _hapus(self, node, nama):
+    if node is None:
+        return node
+
+    if nama.lower() < node.nama.lower():
+        node.kiri = self._hapus(node.kiri, nama)
+
+    elif nama.lower( ) > node.nama.lower():
+        node.kanan = self._hapus(node.kanan, nama)
+
+    else:
+        # === NODE DITEMUKAN ===
+
+        # Kasus 1 & 2: node punya 0 atau 1 anakx
+        if node.kiri is None:
+            return node.kanan
+        elif node.kanan is None:
+            return node.kiri
+
+        # Kasus 3: node punya 2 anak
+        successor = self._min_value(node.kanan)
+        node.nama = successor.nama
+        node.kode = successor.kode
+        node.kanan = self._hapus(node.kanan, successor.nama)
+
+    return node
+
+
+def _min_value(self, node):
+    current = node
+    while current.kiri is not None:
+        current = current.kiri
+    return current
+
+
 # # Bridging --------------------
 #     def compare(self, kode):
 #         hasil = self.compare_(self.akar, kode)
-#         if hasil is not None:
+#         if hasil is not None: 
 #             return hasil
 #         else:
 #             return None

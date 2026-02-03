@@ -38,27 +38,34 @@ class LinkedList:
 
         print("None")
 
-    def HapusDataByNama(self, nama):
+    def HapusDataByNama(self, nama, status):
         if self.isNull():
             print("History Kosong! Tidak ada yang dihapus.")
-            return
+            return False
 
-        # Jika data yang dihapus ada di head
-        if self.head.nama == nama:
+        nama = nama.lower()
+        status = status.lower()
+
+        # Case 1: head yang dihapus
+        if (self.head.nama.lower() == nama and 
+            self.head.stat.lower() == status):
             self.head = self.head.next
-            print(f"History dengan nama {nama} berhasil dihapus.")
-            return
+            print(f"History dengan nama {nama} dan Status {status} berhasil dihapus.")
+            return True
 
-        # Cari node yang akan dihapus
+        # Case 2: node di tengah / akhir
         prev = self.head
         curr = self.head.next
 
         while curr is not None:
-            if curr.nama == nama:
+            if (curr.nama.lower() == nama and 
+                curr.stat.lower() == status):
                 prev.next = curr.next
-            print(f"History dengan nama {nama} berhasil dihapus.")
-            return
-        prev = curr
-        curr = curr.next
+                print(f"History dengan nama {nama} dan Status {status} berhasil dihapus.")
+                return True
 
-        print(f"History dengan nama {nama} tidak ditemukan.")
+            prev = curr
+            curr = curr.next
+
+        print(f"History dengan nama {nama} dan Status {status} tidak ditemukan.")
+        return False

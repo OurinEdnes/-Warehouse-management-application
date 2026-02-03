@@ -81,8 +81,8 @@ class ListBarang:
 
     def TampilkanDataSearchIndx(self, idx):
         b = self.ListBarangGudang[idx]
-        print("Barang Ditemukan : ")
-        print(f"Barang : Id: {b.idBarang:<3} | Nama Barang: {b.NamaBarang:<10} | Stock: {b.Stock:>5}")
+        print("--- Barang Ditemukan ---")
+        print(f"-> Id: {b.idBarang:<5} | Nama Barang: {b.NamaBarang:<10} | Stock: {b.Stock:>5}")
 
     def GetIndex(self, i):
         b = self.ListBarangGudang[i]

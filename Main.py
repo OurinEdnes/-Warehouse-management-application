@@ -41,6 +41,16 @@ class Menu:
     def HistoryBarang(self):
         print("\n=== HISTORY BARANG ===")
         History.Traverse()
+        print("-------------------------")
+        print("1. Menu.")
+        print("2. Hapus History. ")
+        MenuPil = int(input("Menu yand dipilih: "))
+        if MenuPil == 2 :
+            Namabrang = str(input("Masukan nama Barang: "))
+            Status = str(input("Masukan Status Barang: "))
+            History.HapusDataByNama(Namabrang, Status)
+            return
+        else : return
 
     def CekBarang(self): 
         print("\n=== Cek Barang ===") 

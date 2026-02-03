@@ -38,7 +38,7 @@ class LinkedList:
 
         print("None")
 
-    def HapusDataByNama(self, nama):
+    def HapusDataByNama(self, nama, statusMaksud):
         if self.isNull():
             print("History Kosong! Tidak ada yang dihapus.")
             return
@@ -52,13 +52,14 @@ class LinkedList:
         # Cari node yang akan dihapus
         prev = self.head
         curr = self.head.next
+        statusMaksud = self.head.stat
 
         while curr is not None:
             if curr.nama == nama:
                 prev.next = curr.next
-            print(f"History dengan nama {nama} berhasil dihapus.")
+            print(f"History dengan nama {nama} dengan status {statusMaksud} berhasil dihapus.")
             return
         prev = curr
         curr = curr.next
 
-        print(f"History dengan nama {nama} tidak ditemukan.")
+        print(f"History dengan nama {nama} dengan status {statusMaksud} tidak ditemukan.")

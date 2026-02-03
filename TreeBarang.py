@@ -40,8 +40,8 @@ class TreeBarang:
     # =========================
     # SEARCH BARANG
     # =========================
-    def cari_barang(self, kode, section):
-        hasil = self._cari(self.akar, kode)
+    def cari_barang(self, nama, section):
+        hasil = self._cari(self.akar, nama)
         if hasil is not None:
             return hasil
         else:
@@ -49,15 +49,15 @@ class TreeBarang:
                 print("Barang Tidak Ada!")
             return None
     
-    def _cari(self, node, kode):
+    def _cari(self, node, nama):
         if node is None:
             return None
-        if node.nama == kode:
+        if node.nama == nama:
             return node.kode
-        elif kode < node.nama:
-            return self._cari(node.kiri, kode)
+        elif nama < node.nama:
+            return self._cari(node.kiri, nama)
         else:
-            return self._cari(node.kanan, kode)
+            return self._cari(node.kanan, nama)
 
     def Cetak(self):
         print("=== CETAK TREE (In-Order) ===")

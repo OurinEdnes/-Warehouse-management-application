@@ -13,6 +13,9 @@ class AntrianPengiriman:
     def __init__(self):
         self.front = None
         self.rear = None
+        
+    def is_empty(self):
+        return self.front is None
 
     def enqueue(self, id_pesanan, nama_pelanggan, NamaBarang, jumlah):
         waktu = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -51,12 +54,10 @@ class AntrianPengiriman:
 
         temp = self.front
         i = 1
-        while temp:
+        while temp is not None:
             print(f"{i}. {temp.id_pesanan} - {temp.nama_pelanggan} ({temp.waktu_permintaan})")
             temp = temp.next
             i += 1
 
         print("======================================\n")
 
-    def is_empty(self):
-        return self.front is None

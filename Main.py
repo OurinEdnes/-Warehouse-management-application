@@ -69,7 +69,7 @@ class Menu:
             nama = str(input("Masukan Nama Pelanggan: "))
             nmb = str(input("Masukan Nama Barang: "))
             jml = int(input("Masukan Jumlah Barang: "))
-            idxb = Search.cari_barang(nmb)
+            idxb = Search.cari_barang(nmb, "None")
             if idxb is None: 
                 print("Barang tidak ditemukan! --")
                 return
@@ -127,7 +127,7 @@ class Menu:
         for i in range(len(Tesseract.ListBarangGudang)):
             Index = Tesseract.GetIndex(i)
             Nama = Tesseract.GetNama(i)
-            if Index == None : continue
+            if Index == None: continue
             Search.tambah_barang(Index, Nama)
 
     def run(self, i):

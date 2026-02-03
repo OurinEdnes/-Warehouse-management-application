@@ -1,7 +1,7 @@
 class Node:
-    def __init__(self, nama, id, stock, stat):
-        self.nama = nama
+    def __init__(self, id, nama, stock, stat):
         self.id = id
+        self.nama = nama
         self.stock = stock
         self.stat = stat
         self.next = None
@@ -30,8 +30,10 @@ class LinkedList:
             print("History Kosong! ---")
             return
         temp = self.head
+        no = 1
         while temp is not None:
-            print(f"{temp.id} | {temp.nama} | {temp.stock} | {temp.stat} ->", end=" ")
+            print(f"{no}. {temp.id:<15} | {temp.nama:<10} | {temp.stock:>5} | {temp.stat}")
             temp = temp.next
+            no += 1
 
         print("None")

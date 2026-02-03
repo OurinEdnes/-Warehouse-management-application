@@ -40,12 +40,13 @@ class TreeBarang:
     # =========================
     # SEARCH BARANG
     # =========================
-    def cari_barang(self, kode):
+    def cari_barang(self, kode, section):
         hasil = self._cari(self.akar, kode)
         if hasil is not None:
             return hasil
         else:
-            print("Barang Tidak Ada!")
+            if section == "Search":
+                print("Barang Tidak Ada!")
             return None
     
     def _cari(self, node, kode):
@@ -75,23 +76,23 @@ class TreeBarang:
         # KANAN
         self._cetak(node.kanan, "KANAN")
 
-# Bridging --------------------
-    def compare(self, kode):
-        hasil = self.compare_(self.akar, kode)
-        if hasil is not None:
-            return hasil
-        else:
-            return None
+# # Bridging --------------------
+#     def compare(self, kode):
+#         hasil = self.compare_(self.akar, kode)
+#         if hasil is not None:
+#             return hasil
+#         else:
+#             return None
     
-    def compare_(self, node, kode):
-        if node is None:
-            return None
-        if node.nama == kode:
-            return node.kode
-        elif kode < node.nama:
-            return self.compare_(node.kiri, kode)
-        else:
-            return self.compare_(node.kanan, kode)  
+#     def compare_(self, node, kode):
+#         if node is None:
+#             return None
+#         if node.nama == kode:
+#             return node.kode
+#         elif kode < node.nama:
+#             return self.compare_(node.kiri, kode)
+#         else:
+#             return self.compare_(node.kanan, kode)  
                 
 # # =========================
 # # SIMULASI PROGRAM GUDANG

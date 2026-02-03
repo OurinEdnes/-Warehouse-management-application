@@ -32,7 +32,7 @@ class Menu:
         NamaBarang = str(input("Masukan Nama Barang: "))
         Stock = int(input("Masukan Stock Barang: "))
         # Bridging ------------
-        idx = Search.compare(NamaBarang)
+        idx = Search.cari_barang(NamaBarang, "Tambah")
         Pass = Tesseract.AddBarangBaru(Id, NamaBarang, Stock, idx)
         if Pass == 1: History.TambahData(Id, NamaBarang, Stock, "Penambahan Barang")
         elif Pass == 2: History.TambahData(Id, NamaBarang, Stock, "Restock Barang")
@@ -49,8 +49,8 @@ class Menu:
     def SearchBarang(self): # Albani----
         self.RestTree()
         print("\n=== Search Barang ===")
-        Id = str(input("Masukan Nama Barang : "))
-        index = Search.cari_barang(Id)
+        strCari = str(input("Masukan Nama Barang : "))
+        index = Search.cari_barang(strCari, "Search")
         if index is None:
             print("Data Tidak Ditemukan! --")
             Search.Cetak()
@@ -141,23 +141,23 @@ class Menu:
 if __name__ == "__main__":
    # ================= DUMMY DATA =================
     # Barang awal di gudang
-    idx1 = Search.compare("Laptop")
+    idx1 = Search.cari_barang("Laptop", "Tambah")
     Tesseract.AddBarangBaru(101, "Laptop", 15, idx1)
     History.TambahData(101, "Laptop", 15, "Initial Stock")
 
-    idx2 = Search.compare("Mouse")
+    idx2 = Search.cari_barang("Mouse", "Tambah")
     Tesseract.AddBarangBaru(102, "Mouse", 40, idx2)
     History.TambahData(102, "Mouse", 40, "Initial Stock")
 
-    idx3 = Search.compare("Keyboard")
+    idx3 = Search.cari_barang("Keyboard", "Tambah")
     Tesseract.AddBarangBaru(103, "Keyboard", 25, idx3)
     History.TambahData(103, "Keyboard", 25, "Initial Stock")
 
-    idx4 = Search.compare("Monitor")
+    idx4 = Search.cari_barang("Monitor", "Tambah")
     Tesseract.AddBarangBaru(104, "Monitor", 10, idx4)
     History.TambahData(104, "Monitor", 10, "Initial Stock")
 
-    idx5 = Search.compare("Flashdisk")
+    idx5 = Search.cari_barang("Flashdisk", "Tambah")
     Tesseract.AddBarangBaru(105, "Flashdisk", 50, idx5)
     History.TambahData(105, "Flashdisk", 50, "Initial Stock")
     
@@ -185,6 +185,7 @@ if __name__ == "__main__":
     # --------------------------------------------
     menu = Menu();
     choice = 0
+    menu.RestTree()
     while(True):
         os.system('cls')
         print(f"========== Management Gudang ==========")

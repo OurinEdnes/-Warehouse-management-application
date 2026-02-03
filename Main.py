@@ -127,7 +127,7 @@ class Menu:
         for i in range(len(Tesseract.ListBarangGudang)):
             Index = Tesseract.GetIndex(i)
             Nama = Tesseract.GetNama(i)
-            if Index == None : continue
+            if Index == None: continue
             Search.tambah_barang(Index, Nama)
 
     def run(self, i):

@@ -26,6 +26,8 @@ class TreeBarang:
             self._tambah(self.akar, kode, nama)
 
     def _tambah(self, node, kode, nama):
+        if nama.lower() == node.nama.lower():
+            return
         if nama.lower() < node.nama.lower():
             if node.kiri is None:
                 node.kiri = BarangNode(kode, nama)
@@ -58,7 +60,52 @@ class TreeBarang:
             return self._cari(node.kiri, nama)
         else:
             return self._cari(node.kanan, nama)
+        
+    # =========================
+    # DELETE BARANG
+    # =========================
+    def hapus_barang(self, nama):
+        self.akar = self._hapus(self.akar, nama)
 
+    def _hapus(self, node, nama):
+        if node is None:
+            return None
+
+        # Cari node yang mau dihapus
+        if nama.lower() < node.nama.lower():
+            node.kiri = self._hapus(node.kiri, nama)
+
+        elif nama.lower() > node.nama.lower():
+            node.kanan = self._hapus(node.kanan, nama)
+
+        else:
+            # ===== NODE DITEMUKAN =====
+            # Case 1: Tidak punya anak
+            if node.kiri is None and node.kanan is None:
+                return None
+
+            # Case 2: Punya satu anak
+            if node.kiri is None:
+                return node.kanan
+            elif node.kanan is None:
+                return node.kiri
+
+            # Case 3: Punya dua anak
+            successor = self._min_value(node.kanan)
+            node.nama = successor.nama
+            node.kode = successor.kode
+            node.kanan = self._hapus(node.kanan, successor.nama)
+
+        return node
+
+    def _min_value(self, node):
+        current = node
+        while current.kiri is not None:
+            current = current.kiri
+        return current
+    
+
+    # Debugging----
     def Cetak(self):
         print("=== CETAK TREE (In-Order) ===")
         self._cetak(self.akar, "ROOT")

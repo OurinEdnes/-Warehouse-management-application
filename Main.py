@@ -45,6 +45,21 @@ class Menu:
     def CekBarang(self): 
         print("\n=== Cek Barang ===") 
         Tesseract.TampilData()
+        print("-------------------------")
+        print("1. Menu.")
+        print("2. Hapus Barang di rak. ")
+        ArrayPil = int(input("Menu yang dipilih: "))
+        if ArrayPil == 2 :
+            namaBarang = str(input("Masukan Nama Barang: "))
+            idxBarang = Search.cari_barang(namaBarang, "CariIndex")
+            if idxBarang is None :
+                print("Barang tidak ada! ")
+            else:
+                Tesseract.HapusBarang(idxBarang)
+                Search.hapus_barang(namaBarang)
+                print("Barang Sudah Dihapus!")
+        else : return
+        
 
     def SearchBarang(self): # Albani----
         self.RestTree()
@@ -53,7 +68,6 @@ class Menu:
         index = Search.cari_barang(strCari, "Search")
         if index is None:
             print("Data Tidak Ditemukan! --")
-            Search.Cetak()
             return
 
         Tesseract.TampilkanDataSearchIndx(index)

@@ -13,12 +13,7 @@ class ListBarang:
         self.index = 0
 
     def Resize(self):
-        NewSize = len(self.ListBarangGudang) * 2
-        ResizeSection = [None] * NewSize
-        for i in range(len(self.ListBarangGudang)):
-            ResizeSection[i] = self.ListBarangGudang[i]
-
-        self.ListBarangGudang = ResizeSection
+        self.ListBarangGudang = self.ListBarangGudang + [None] * len(self.ListBarangGudang)
 
     def AddBarangBaru(self, id, nama, stockAwal, idx):
         if idx is not None:
@@ -27,7 +22,7 @@ class ListBarang:
         
         if self.index >= len(self.ListBarangGudang):
             pilih = str(input("Gudang Penuh! Ingin Menambah kapasitas Rak? (Y/N)")).lower
-            if pilih == "y":
+            if pilih == "n":
                 return None
             else:
                 self.Resize()
@@ -38,11 +33,11 @@ class ListBarang:
                 return 1
     
         barang_baru = Barang(id, nama, stockAwal)
-        # for i in range(self.index):
-        #     if self.ListBarangGudang[i].Stock == 0:
-        #         barang_baru.indexBarang = i
-        #         self.ListBarangGudang[i] = barang_baru
-        #         return 1
+        for i in range(self.index):
+            if self.ListBarangGudang[i] is None:
+                barang_baru.indexBarang = i
+                self.ListBarangGudang[i] = barang_baru
+                return 1
         
         barang_baru.indexBarang = self.index
         self.ListBarangGudang[self.index] = barang_baru
@@ -79,8 +74,10 @@ class ListBarang:
 
         for i in range(self.index):
             b = self.ListBarangGudang[i]
-            if b is None : continue
-            print(f"{i+1:<4} {b.idBarang:<5} {b.NamaBarang:<20} {b.Stock:>5}")
+            if b is None or b.idBarang is None:
+                print(f"{i+1:<4} {"[Kosong]":<5} {"[Kosong]":<20} {"[Kosong]":>5}")
+            else:
+                print(f"{i+1:<4} {b.idBarang:<5} {b.NamaBarang:<20} {b.Stock:>5}")
 
     def TampilkanDataSearchIndx(self, idx):
         b = self.ListBarangGudang[idx]

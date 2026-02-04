@@ -31,6 +31,7 @@ class Menu:
         Id = int(input("Masukan Id Barang: "))
         NamaBarang = str(input("Masukan Nama Barang: "))
         Stock = int(input("Masukan Stock Barang: "))
+        
         # Bridging ------------
         idx = Search.cari_barang(NamaBarang, "Tambah")
         Pass = Tesseract.AddBarangBaru(Id, NamaBarang, Stock, idx)

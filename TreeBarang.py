@@ -41,9 +41,14 @@ class TreeBarang:
     # SEARCH BARANG
     # =========================
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     def cari_barang(self, kode, section):#untuk ngasih tahu untuk apa.
         hasil = self._cari(self.akar, kode)#ada dua pilihan none atau index data yang dicari
         
+=======
+    def cari_barang(self, nama, section): #untuk ngasih tahu untuk apa.
+        hasil = self._cari(self.akar, nama) #ada dua pilihan none atau index data yang dicari
+>>>>>>> Stashed changes
 =======
     def cari_barang(self, nama, section): #untuk ngasih tahu untuk apa.
         hasil = self._cari(self.akar, nama) #ada dua pilihan none atau index data yang dicari

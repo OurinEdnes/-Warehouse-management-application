@@ -14,9 +14,9 @@ class LinkedList:
         return self.head is None
 
     # Bintang --
-    def TambahData(self, nama, id, stock, stat):
+    def TambahData(self, nama, id, stock, stat): # Method ini digunakan untuk menambahkan data baru ke dalam Linked List. 
+                                                # Data yang ditambahkan akan menjadi 1 node baru dan diletakkan di akhir list.
         node_baru = Node(nama, id, stock, stat)
-
         if self.head is None:
             self.head = node_baru
         else:

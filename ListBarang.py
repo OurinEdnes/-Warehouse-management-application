@@ -90,7 +90,7 @@ class ListBarang:
     def GetIndex(self, i):
         b = self.ListBarangGudang[i]
         if b is None:
-            return None
+            return None 
         return b.indexBarang
 
     def GetNama(self, i):

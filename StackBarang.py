@@ -35,7 +35,7 @@ class StackBarang:
         self.Top = self.Top.next
        
         self.Isi -= 1
-        print(f"[POP] Barang {barang.NamaPelangggan} dipindahkan ke truk")
+        print(f"[POP] Barang {barang.NamaPelangggan}")
         return barang.IdPelangan, barang.NamaPelangggan, barang.Barang
 
     def is_empty(self):

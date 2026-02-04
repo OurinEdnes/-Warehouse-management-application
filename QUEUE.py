@@ -41,7 +41,7 @@ class AntrianPengiriman:
         if self.front is None:
             self.rear = None
 
-        print(f"[DEQUEUE] Memproses pengiriman {temp.id_pesanan}...")
+        print(f"[DEQUEUE] Memproses pengiriman {temp.nama_pelanggan}...")
         return temp
 
     def tampilkan_antrean(self):

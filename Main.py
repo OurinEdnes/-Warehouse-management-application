@@ -31,6 +31,7 @@ class Menu:
         Id = int(input("Masukan Id Barang: "))
         NamaBarang = str(input("Masukan Nama Barang: "))
         Stock = int(input("Masukan Stock Barang: "))
+        
         # Bridging ------------
         idx = Search.cari_barang(NamaBarang, "Tambah")
         Pass = Tesseract.AddBarangBaru(Id, NamaBarang, Stock, idx)
@@ -124,7 +125,7 @@ class Menu:
         Troli.tampil()
         Truk.tampil()
 
-        print("\nTruk Hanya Dapat disi dengan kapasitas 10 Barang!")
+        print("\nTruk Hanya Dapat disi dengan kapasitas Lebih besar dari 4 pack!")
         pilih = input("Lanjutkan memindahkan barang ke truk? (y/n): ")
         if pilih.lower() != 'y':
             print("Proses pemindahan dibatalkan.")
@@ -139,14 +140,12 @@ class Menu:
         else:
             print("\n---- Susun barang ke truk:")
             while not Troli.is_empty():
-                if Truk.Isi > 10 : break
-                print("\n")
                 id, nama, barang = Troli.pop()
-                print("\n")
                 Truk.push(id, nama, barang)
             print("========================================")
             print("Barang Berhasil Dipindahkan Kedalam Truk")
             print("========================================")
+
     def RestTree(self):
         for i in range(len(Tesseract.ListBarangGudang)):
             Index = Tesseract.GetIndex(i)

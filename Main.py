@@ -33,7 +33,7 @@ class Menu:
         Stock = int(input("Masukan Stock Barang: "))
         
         # Bridging ------------
-        idx = Search.cari_barang(NamaBarang, "Tambah")
+        idx = Search.cari_barang(NamaBarang)
         Pass = Tesseract.AddBarangBaru(Id, NamaBarang, Stock, idx)
         if Pass == 1: History.TambahData(Id, NamaBarang, Stock, "Penambahan Barang")
         elif Pass == 2: History.TambahData(Id, NamaBarang, Stock, "Restock Barang")
@@ -62,7 +62,7 @@ class Menu:
         ArrayPil = int(input("Menu yang dipilih: "))
         if ArrayPil == 2 :
             namaBarang = str(input("Masukan Nama Barang: "))
-            idxBarang = Search.cari_barang(namaBarang, "CariIndex")
+            idxBarang = Search.cari_barang(namaBarang)
             if idxBarang is None :
                 print("Barang tidak ada! ")
             else:
@@ -76,7 +76,7 @@ class Menu:
         self.RestTree()
         print("\n=== Search Barang ===")
         strCari = str(input("Masukan Nama Barang : "))
-        index = Search.cari_barang(strCari, "Search")
+        index = Search.cari_barang(strCari)
         if index is None:
             print("Data Tidak Ditemukan! --")
             return
@@ -94,7 +94,7 @@ class Menu:
             nama = str(input("Masukan Nama Pelanggan: "))
             nmb = str(input("Masukan Nama Barang: "))
             jml = int(input("Masukan Jumlah Barang: "))
-            idxb = Search.cari_barang(nmb, "None")
+            idxb = Search.cari_barang(nmb)
             if idxb is None: 
                 print("Barang tidak ditemukan! --")
                 return
@@ -164,23 +164,23 @@ class Menu:
 if __name__ == "__main__":
    # ================= DUMMY DATA =================
     # Barang awal di gudang
-    idx1 = Search.cari_barang("Laptop", "Tambah")
+    idx1 = Search.cari_barang("Laptop")
     Tesseract.AddBarangBaru(101, "Laptop", 15, idx1)
     History.TambahData(101, "Laptop", 15, "Initial Stock")
 
-    idx2 = Search.cari_barang("Mouse", "Tambah")
+    idx2 = Search.cari_barang("Mouse")
     Tesseract.AddBarangBaru(102, "Mouse", 40, idx2)
     History.TambahData(102, "Mouse", 40, "Initial Stock")
 
-    idx3 = Search.cari_barang("Keyboard", "Tambah")
+    idx3 = Search.cari_barang("Keyboard")
     Tesseract.AddBarangBaru(103, "Keyboard", 25, idx3)
     History.TambahData(103, "Keyboard", 25, "Initial Stock")
 
-    idx4 = Search.cari_barang("Monitor", "Tambah")
+    idx4 = Search.cari_barang("Monitor")
     Tesseract.AddBarangBaru(104, "Monitor", 10, idx4)
     History.TambahData(104, "Monitor", 10, "Initial Stock")
 
-    idx5 = Search.cari_barang("Flashdisk", "Tambah")
+    idx5 = Search.cari_barang("Flashdisk")
     Tesseract.AddBarangBaru(105, "Flashdisk", 50, idx5)
     History.TambahData(105, "Flashdisk", 50, "Initial Stock")
     

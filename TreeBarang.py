@@ -42,14 +42,12 @@ class TreeBarang:
     # =========================
     # SEARCH BARANG
     # =========================
-    def cari_barang(self, nama, section): #section untuk ngasih tahu untuk apa.
+    def cari_barang(self, nama): #section untuk ngasih tahu untuk apa.
         hasil = self._cari(self.akar, nama) # ada dua pilihan antara none atau index data yang dicari
         
         if hasil is not None:
            return hasil
         else:
-            if section == "Search":
-                print("Barang Tidak Ada!")
             return None
     
     def _cari(self, node, nama):
